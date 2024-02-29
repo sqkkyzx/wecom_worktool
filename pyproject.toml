@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[project]
+name = "wecom_worktool"
+version = "0.0.2"
+description = "企业微信WorkTool机器人API的封装。"
+readme = "README.md"
+authors = [
+    {name = "sqkkyzx", email = "admin@sqkkyzx.com"},
+]
+
+dependencies = ["requests"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.publish]
+repository = "pypi"
+
+[tool.poetry.changelog]
+"0.0.2" = "FIX: 修正了文件类型错误"
+"0.0.1" = "封装了发送文件和发送文本的两个接口"
