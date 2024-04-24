@@ -55,3 +55,57 @@ class Worktool(object):
                 "extraText": extra_msg
             }
         )
+
+    def group_member_add(self, group_name: str, members: list, show_history: bool):
+        self.action.append(
+            {
+                "type": 207,
+                "groupName": group_name,
+                "selectList": members,
+                "showMessageHistory": show_history
+            }
+        )
+
+    def group_member_remove(self, group_name: str, members: list):
+        self.action.append(
+            {
+                "type": 207,
+                "groupName": group_name,
+                "removeList": members
+            }
+        )
+
+    def group_notice(self, group_name: str, notice: str):
+        self.action.append(
+            {
+                "type": 207,
+                "groupName": group_name,
+                "newGroupAnnouncement": notice
+            }
+        )
+
+    def group_rename(self, group_name: str, new_group_name: str):
+        self.action.append(
+            {
+                "type": 207,
+                "groupName": group_name,
+                "newGroupName": new_group_name
+            }
+        )
+
+    def group_remark(self, group_name: str, remark: str):
+        self.action.append(
+            {
+                "type": 207,
+                "groupName": group_name,
+                "groupRemark": remark
+            }
+        )
+
+    def group_disband(self, group_name: str):
+        self.action.append(
+            {
+                "type": 219,
+                "groupName": group_name
+            }
+        )
