@@ -162,12 +162,27 @@ class Worktool(object):
             }
         )
 
-    def friend_add(self, phone: str, mark_name: str = None, mark_extra: str = None, tags: List[str] = None, extra_msg: str = None):
+    def friend_add_from_phone(self, phone: str, mark_name: str = None, mark_extra: str = None, tags: List[str] = None, extra_msg: str = None):
         self.action.append(
             {
                 "type": 213,
                 "friend": {
                     "phone": phone,
+                    "markName": mark_name,
+                    "markExtra": mark_extra,
+                    "tagList": tags,
+                    "leavingMsg": extra_msg
+                }
+            }
+        )
+
+    def friend_add_from_group(self, group_name: str, nickname: str, mark_name: str = None, mark_extra: str = None, tags: List[str] = None, extra_msg: str = None):
+        self.action.append(
+            {
+                "type": 220,
+                "groupName": group_name,
+                "friend": {
+                    "name": nickname,
                     "markName": mark_name,
                     "markExtra": mark_extra,
                     "tagList": tags,
