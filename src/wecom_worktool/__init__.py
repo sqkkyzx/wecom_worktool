@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 import requests
 
@@ -137,13 +137,13 @@ class Worktool(object):
             }
         )
 
-    def todo(self, content: str, nickname: List[str] = None, group_name: List[str] = None):
-        if group_name or nickname:
+    def todo(self, content: str, nicknames: List[str] = None, group_names: List[str] = None):
+        if group_names or nicknames:
             title_list = []
-            if group_name:
-                title_list.extend(group_name)
-            if nickname:
-                title_list.extend(nickname)
+            if group_names:
+                title_list.extend(group_names)
+            if nicknames:
+                title_list.extend(nicknames)
             self.action.append(
                 {
                     "type": 221,
@@ -162,7 +162,7 @@ class Worktool(object):
             }
         )
 
-    def friend_add(self, phone: str, mark_name: str = None, mark_extra: str = None, tags: List[str] = None, msg: str = None):
+    def friend_add(self, phone: str, mark_name: str = None, mark_extra: str = None, tags: List[str] = None, extra_msg: str = None):
         self.action.append(
             {
                 "type": 213,
@@ -171,7 +171,44 @@ class Worktool(object):
                     "markName": mark_name,
                     "markExtra": mark_extra,
                     "tagList": tags,
-                    "leavingMsg": msg
+                    "leavingMsg": extra_msg
                 }
+            }
+        )
+
+    def friend_modify(self, search: str, search_type: Literal["name", "phone"], mark_name: str = None, mark_extra: str = None, tags: List[str] = None):
+        modify_content = {
+            "markExtra": mark_extra,
+            "tagList": tags,
+        }
+        if search_type == "phone":
+            modify_content["phone"] = search
+        else:
+            modify_content["markName"] = search
+
+        self.action.append(
+            {
+                "type": 213,
+                "friend": modify_content
+            }
+        )
+
+    def send_tencent_doc(self, nicknames: List[str] , object_name: str , extra_msg: str = ""):
+        self.action.append(
+            {
+                "type": 211,
+                "titleList": nicknames,
+                "objectName": object_name,
+                "extraText": extra_msg
+            }
+        )
+
+    def send_weiyun_img(self, nicknames: List[str] , object_name: str , extra_msg: str = ""):
+        self.action.append(
+            {
+                "type": 208,
+                "titleList": nicknames,
+                "objectName": object_name,
+                "extraText": extra_msg
             }
         )
