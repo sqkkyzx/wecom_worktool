@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/wecom_worktool.iml" filepath="$PROJECT_DIR$/.idea/wecom_worktool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/wecom-worktool.iml" filepath="$PROJECT_DIR$/.idea/wecom-worktool.iml" />
     </modules>
   </component>
 </project>
