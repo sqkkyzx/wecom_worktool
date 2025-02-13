@@ -7,6 +7,12 @@
 
 - [x] 发送文本
 - [x] 发送图片/文件/音频/视频/其他
+- [x] 添加群成员
+- [x] 移除群成员
+- [x] 修改群名
+- [x] 修改公告
+- [x] 修改群备注
+- [x] 解散群
 
 
 # 使用示例
@@ -16,9 +22,9 @@
 `pip install wecom_worktool`
 
 ```python
-import worktool
+from wecom_worktool import Worktool
 
-with worktool.Worktool("your_robot_id") as bot:
+with Worktool("your_robot_id") as bot:
         bot.send_file(
             ["群1", "好友1"],
             "文件名.jpg",
@@ -34,5 +40,4 @@ with worktool.Worktool("your_robot_id") as bot:
             "Hello world!",
             ["@所有人"]
         )
-
 ```

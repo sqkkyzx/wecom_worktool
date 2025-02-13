@@ -16,7 +16,10 @@ class Worktool(object):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        requests.post(
+        self.push()
+
+    def push(self):
+        return requests.post(
             url="https://api.worktool.ymdyes.cn/wework/sendRawMessage",
             params={"robotId": self.robotid},
             json={
