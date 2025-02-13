@@ -1,3 +1,5 @@
+from typing import List
+
 import requests
 
 
@@ -16,15 +18,25 @@ class Worktool(object):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.push()
+        self.push_action()
 
-    def push(self):
+    def push_action(self):
         return requests.post(
             url="https://api.worktool.ymdyes.cn/wework/sendRawMessage",
             params={"robotId": self.robotid},
             json={
                 "socketType": 2,
                 "list": self.action
+            }
+        )
+
+    def clear_action(self):
+        return requests.post(
+            url="https://api.worktool.ymdyes.cn/wework/sendRawMessage",
+            params={"robotId": self.robotid},
+            json={
+                "socketType": 2,
+                "list": {"type": 304}
             }
         )
 
@@ -78,6 +90,18 @@ class Worktool(object):
             }
         )
 
+    def group_member_remark(self, group_name: str, nickname: str, mark_name: str):
+        self.action.append(
+            {
+                "type": 225,
+                "groupName": group_name,
+                "friend": {
+                    "name": nickname,
+                    "markName": mark_name
+                }
+            }
+        )
+
     def group_notice(self, group_name: str, notice: str):
         self.action.append(
             {
@@ -110,5 +134,44 @@ class Worktool(object):
             {
                 "type": 219,
                 "groupName": group_name
+            }
+        )
+
+    def todo(self, content: str, nickname: List[str] = None, group_name: List[str] = None):
+        if group_name or nickname:
+            title_list = []
+            if group_name:
+                title_list.extend(group_name)
+            if nickname:
+                title_list.extend(nickname)
+            self.action.append(
+                {
+                    "type": 221,
+                    "titleList": title_list,
+                    "receivedContent": content
+                }
+            )
+
+    def friend_remove(self, nickname: str):
+        self.action.append(
+            {
+                "type": 234,
+                "friend": {
+                    "name": nickname
+                }
+            }
+        )
+
+    def friend_add(self, phone: str, mark_name: str = None, mark_extra: str = None, tags: List[str] = None, msg: str = None):
+        self.action.append(
+            {
+                "type": 213,
+                "friend": {
+                    "phone": phone,
+                    "markName": mark_name,
+                    "markExtra": mark_extra,
+                    "tagList": tags,
+                    "leavingMsg": msg
+                }
             }
         )
