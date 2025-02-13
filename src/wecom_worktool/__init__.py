@@ -193,6 +193,7 @@ class Worktool(object):
 
     def friend_modify(self, search: str, search_type: Literal["name", "phone"], mark_name: str = None, mark_extra: str = None, tags: List[str] = None):
         modify_content = {
+            "markName": mark_name,
             "markExtra": mark_extra,
             "tagList": tags,
         }
